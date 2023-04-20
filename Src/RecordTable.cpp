@@ -34,7 +34,7 @@ RecordTable::RecordTable() : record_table_filename("record_table.txt") {
 }
 
 std::string RecordTable::get_table(){
-    std::string record_table_str;
+    std::string record_table_str = "==================\nTable of records!\n==================\n";
     uint8_t counter = 1;
     for (auto record_iter = record_list.begin();
          record_iter != record_list.end();

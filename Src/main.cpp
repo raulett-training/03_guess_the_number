@@ -3,12 +3,17 @@
 #include <format>
 #include <algorithm>
 #include "RecordTable.h"
-#include "parse_args.h"
+#include "parse_args_max.h"
 
 
 int main(int argc, char** argv) {
     setlocale(LC_ALL, "ru_RU.UTF-8");
-    uint32_t max_number = parse_args(argc, argv, 100);
+    uint32_t max_number = parse_args_max(argc, argv, 100);
+    if (max_number == 0){
+        RecordTable record_table = RecordTable();
+        std::cout << record_table.get_table() << std::endl;
+        return 0;
+    }
     std::cout << std::format("'Guess the number' the game. Number from 0 to {} was thought.", max_number) << std::endl;
     std::cout << "What is your name?:" << std::endl;
     std::string name_str;
