@@ -11,7 +11,7 @@
 struct Record{
     std::string Name;
     unsigned int attempt_num;
-    static bool record_compare(const Record &a, const Record &b);
+    static bool record_compare_name_and_count(const Record &a, const Record &b);
 };
 
 class RecordTable {

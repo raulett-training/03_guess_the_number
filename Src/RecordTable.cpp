@@ -7,11 +7,13 @@
 #include <list>
 #include <sstream>
 #include <iostream>
+#include <map>
 
 
-
-bool Record::record_compare(const Record &a, const Record &b){
-    return a.attempt_num < b.attempt_num;
+bool Record::record_compare_name_and_count(const Record &a, const Record &b){
+    if (a.Name == b.Name){
+        return a.attempt_num < b.attempt_num;
+    } else return a.Name < b.Name;
 }
 
 RecordTable::RecordTable() : record_table_filename("record_table.txt") {
@@ -49,9 +51,10 @@ std::string RecordTable::get_table(){
 }
 
 void RecordTable::add_record(const Record& record) {
-
     record_list.push_back(record);
-    record_list.sort(Record::record_compare);
+    record_list.sort(Record::record_compare_name_and_count);
+    record_list.unique([](const Record& a, const Record& b){return a.Name==b.Name;});
+    record_list.sort([](const Record& a, const Record& b){return a.attempt_num<b.attempt_num;});
 }
 
 bool RecordTable::store_table() {
