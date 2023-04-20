@@ -3,29 +3,12 @@
 #include <format>
 #include <algorithm>
 #include "RecordTable.h"
+#include "parse_args.h"
 
 
 int main(int argc, char** argv) {
     setlocale(LC_ALL, "ru_RU.UTF-8");
-    uint32_t max_number = 100;
-    if (argc > 0) {
-        std::cout << "We have at least one argument!" << std::endl;
-        for (int i=0; i<argc; i++) {
-
-
-            std::string arg_str = argv[i];
-            std::cout << std::format("argv[{}] = ", i) << argv[i] << std::endl;
-            std::cout << std::format("argv[{}] is digit: {}",
-                        i, std::all_of(arg_str.begin(),
-                                       arg_str.end(), ::isdigit)) << std::endl;
-            if ((arg_str == "-max")&&(i+1 < argc)){
-                std::string arg_str = argv[i+1];
-                if (std::all_of(arg_str.begin(), arg_str.end(), ::isdigit)){
-                    max_number = std::stoi(arg_str);
-                }
-            }
-        }
-    }
+    uint32_t max_number = parse_args(argc, argv, 100);
     std::cout << std::format("'Guess the number' the game. Number from 0 to {} was thought.", max_number) << std::endl;
     std::cout << "What is your name?:" << std::endl;
     std::string name_str;
