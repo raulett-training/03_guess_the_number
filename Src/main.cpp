@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
     std::cout << std::format("'Guess the number' the game. Number from 0 to {} was thought.", max_number) << std::endl;
     std::cout << "What is your name?:" << std::endl;
     std::string name_str;
-    std::cin >> name_str;
+    std::getline(std::cin, name_str);
 
     std::srand(std::time(nullptr));
     const uint8_t random_var = std::rand() % max_number+1;
